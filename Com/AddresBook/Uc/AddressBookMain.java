@@ -26,12 +26,21 @@ public class AddressBookMain
 		this.email = email;
 	}
 	
+	public void PrintAddresBookDetails()
+	{
+		System.out.println("Name: "+firstName+" "+lastName);
+        System.out.println("Address: "+address);
+        System.out.println("City,State: "+city+", "+state);
+        System.out.println("Zipcode: "+zipCode);
+        System.out.println("Phone Number: "+ phoneNumber);
+        System.out.println("Email: "+email);
+	}
 
 	public static void main(String[] args) 
 	{
 		System.out.println(" Welcome to Address Book");
 		AddressBookMain addressBook = new AddressBookMain("Gaurav","Dhande","Jay ashtvinayk bldg","Mumbai","Maharashtra",421202,977139767,"gpdhande12@gmail.com");
-
+		addressBook.PrintAddresBookDetails();
 	}
 
 }
