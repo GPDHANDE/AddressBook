@@ -47,7 +47,7 @@ public class AddressBookMain
 	}
 	AddressBookMain()
     {
-        addContact();
+       
     }
     AddressBookMain(String firstName, String lastName, String address, String city, String state, String zipCode, String phoneNumber, String email) {
         this.firstName = firstName;
@@ -100,7 +100,8 @@ public class AddressBookMain
                     else 
                     {
                         contacts.add(newContact);
-                        MultipleAddressBook.updateDictionaries(city, state, newContact);
+                        numOfContacts++;
+                        MultipleAddressBook.updateDictionaries(city, state,zipCode ,newContact);
                     }
 
     }
@@ -153,7 +154,7 @@ public class AddressBookMain
                     }
                     default -> System.out.println("Wrong number/key entered.");
                 }
-                MultipleAddressBook.updateDictionaries(cont.city, cont.state, cont);
+                MultipleAddressBook.updateDictionaries(cont.city, cont.state,cont.zipCode, cont);
                 System.out.println("The new contact info is: ");
                 return;
             }
