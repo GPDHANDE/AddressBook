@@ -1,4 +1,4 @@
-package Com.AddresBook.Uc;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
@@ -15,6 +15,7 @@ public class AddressBookMain
     public int numOfContacts = 0;
     ArrayList<AddressBookMain> contacts = new ArrayList<AddressBookMain>();
     static Scanner scanner = new Scanner(System.in);
+
 
     AddressBookMain()
     {
@@ -45,6 +46,17 @@ public class AddressBookMain
         }
     }
     
+
+    @Override
+    public boolean equals(Object obj) 
+    {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        AddressBookMain that = (AddressBookMain) obj;
+        return Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName);
+    }
+
     public void addContact() 
     {
     	boolean condi = true;
@@ -74,8 +86,16 @@ public class AddressBookMain
                     System.out.print("Enter the email: ");
                     String email = scanner.nextLine();
 
-                    contacts.add(new AddressBookMain(firstName, lastName, address, city, state, zipCode, phoneNumber, email));
-                    numOfContacts++;
+                    
+                    AddressBookMain newContact =new AddressBookMain(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
+                    if (contacts.stream().anyMatch(contact -> contact.equals(newContact))) {
+                        System.out.println("This contact already exists.");
+                    }
+                    else {
+                        contacts.add(newContact);
+                        numOfContacts++;
+                    }
+
                 }
                 case 2 -> 
                 {
@@ -159,7 +179,6 @@ public class AddressBookMain
         }
     }
     	
-
            static void deleteContact(ArrayList<AddressBookMain> contacts) 
            {
                 Scanner scanner = new Scanner(System.in);
@@ -175,10 +194,15 @@ public class AddressBookMain
                     }
                 }
                 System.out.println("Contact has been deleted");
-            }
+            
+
+
+           }
+   
 	public static void main(String[] args) 
 	{
 		
+
 
 	}
 
