@@ -62,16 +62,7 @@ public class AddressBookMain
     
     public void printInfoDetails() 
     {
-        for (AddressBookMain con : contacts) 
-        {
-            System.out.println("Name: " + con.firstName + " " + con.lastName);
-            System.out.println("Address: " + con.address);
-            System.out.println("City, State: " + con.city + ", " + con.state);
-            System.out.println("Zipcode: " + con.zipCode);
-            System.out.println("Phone Number: " + con.phoneNumber);
-            System.out.println("Email: " + con.email);
-            System.out.println();
-        }
+        contacts.stream().sorted((a,b)->(a.firstName+" "+a.lastName).compareToIgnoreCase(b.firstName+" "+b.lastName)).forEach(System.out::println);
     }
     
     @Override
@@ -204,6 +195,14 @@ public class AddressBookMain
                }
            }
        }
+       
+       
+	@Override
+	public String toString() {
+		return "AddressBookMain firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="
+				+ city + ", state=" + state + ", zipCode=" + zipCode + ", phoneNumber=" + phoneNumber + ", email="
+				+ email + "";
+	}
 	public static void main(String[] args) 
 	{
 
