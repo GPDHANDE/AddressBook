@@ -64,11 +64,14 @@ public class MultipleAddressBook
         }
     }
 
-    public static void viewPersonsByState(String state) {
+    public static void viewPersonsByState(String state) 
+    {
         Set<AddressBookMain> persons = statePersonMap.getOrDefault(state, new HashSet<>());
-        if (persons.isEmpty()) {
+        if (persons.isEmpty()) 
+        {
             System.out.println("No contacts found in " + state);
-        } else {
+        } else 
+        {
             persons.forEach(contact -> {
                 System.out.println("Name: " + contact.getFirstName() + " " + contact.getLastName());
                 System.out.println("Address: " + contact.getAddress());
@@ -80,6 +83,7 @@ public class MultipleAddressBook
                 System.out.println();
             });
         }
+    }
 
     public static void main(String[] args) 
     {
@@ -101,6 +105,9 @@ public class MultipleAddressBook
             case 1:
             	System.out.println("Enter the name of the address book: ");
             	String name = scanner.next();
+            	AddressBookMain addressBook = new AddressBookMain();
+                multipleAddressBook.put(name, addressBook);
+                addressBook.manageContacts();
             	multipleAddressBook.put(name, new AddressBookMain());
             	break;
             case 2:
