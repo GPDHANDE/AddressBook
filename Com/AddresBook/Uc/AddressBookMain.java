@@ -1,4 +1,3 @@
-package Com.AddresBook.Uc;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -16,6 +15,8 @@ public class AddressBookMain
     public int numOfContacts = 0;
     ArrayList<AddressBookMain> contacts = new ArrayList<AddressBookMain>();
     static Scanner scanner = new Scanner(System.in);
+
+
     AddressBookMain()
     {
         addContact();
@@ -45,6 +46,7 @@ public class AddressBookMain
         }
     }
     
+
     @Override
     public boolean equals(Object obj) 
     {
@@ -54,6 +56,7 @@ public class AddressBookMain
         return Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName);
     }
+
     public void addContact() 
     {
     	boolean condi = true;
@@ -82,6 +85,7 @@ public class AddressBookMain
                     String phoneNumber = scanner.nextLine();
                     System.out.print("Enter the email: ");
                     String email = scanner.nextLine();
+
                     
                     AddressBookMain newContact =new AddressBookMain(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
                     if (contacts.stream().anyMatch(contact -> contact.equals(newContact))) {
@@ -190,9 +194,14 @@ public class AddressBookMain
                     }
                 }
                 System.out.println("Contact has been deleted");
-            }
+            
+
+
+           }
+   
 	public static void main(String[] args) 
 	{
+		
 
 
 	}
