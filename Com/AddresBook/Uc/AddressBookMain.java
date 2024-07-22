@@ -15,6 +15,37 @@ public class AddressBookMain
     public int numOfContacts = 0;
     ArrayList<AddressBookMain> contacts = new ArrayList<AddressBookMain>();
     static Scanner scanner = new Scanner(System.in);
+    
+    
+    public String getFirstName() {
+		return firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public String getCity() {
+		return city;
+	}
+	public String getState() {
+		return state;
+	}
+	public String getZipCode() {
+		return zipCode;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public ArrayList<AddressBookMain> getContacts() {
+		return contacts;
+	}
+	AddressBookMain()
+=======
 
 
     AddressBookMain()
