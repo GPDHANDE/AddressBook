@@ -12,9 +12,10 @@ public class MultipleAddressBook
 	static HashMap<String, AddressBookMain> multipleAddressBook = new HashMap<>();
 	static HashMap<String, Set<AddressBookMain>> cityPersonMap = new HashMap<>();
     static HashMap<String, Set<AddressBookMain>> statePersonMap = new HashMap<>();
+    static HashMap<String, Set<AddressBookMain>> zipPersonMap = new HashMap<>();
+
     
-    
-    public static void updateDictionaries(String city, String state, AddressBookMain contact) {
+    public static void updateDictionaries(String city, String state, String zipcode,AddressBookMain contact) {
         cityPersonMap.computeIfAbsent(city, k -> new HashSet<>()).add(contact);
         statePersonMap.computeIfAbsent(state, k -> new HashSet<>()).add(contact);
     }
@@ -84,6 +85,17 @@ public class MultipleAddressBook
             });
         }
     }
+    
+    public static void viewPersonsByZip(String zip) { 
+        Set<AddressBookMain> persons = zipPersonMap.getOrDefault(zip, new HashSet<>());
+        if (persons.isEmpty()) {
+            System.out.println("No contacts found in " + zip);
+        } else {
+            persons.stream()
+                    .sorted((c1, c2) -> (c1.getFirstName() + " " + c1.getLastName()).compareTo(c2.getFirstName() + " " + c2.getLastName()))
+                    .forEach(System.out::println);
+        }
+    }
 
     public static void main(String[] args) 
     {
@@ -96,7 +108,8 @@ public class MultipleAddressBook
             System.out.println("2. Search person by city or state");
             System.out.println("3. View persons by city");
             System.out.println("4. View persons by state");
-            System.out.println("5. Exit");
+            System.out.println("5. View persons by zip code");
+            System.out.println("6. Exit");
             int choice = scanner.nextInt();
             
             
@@ -126,7 +139,11 @@ public class MultipleAddressBook
                 String state = scanner.nextLine();
                 viewPersonsByState(state);
                 break;
-            case 5 :check = false; 
+            case 5 :
+                System.out.println("Enter zip code to view persons: ");
+                String zip = scanner.nextLine();
+                viewPersonsByZip(zip);
+            case 6 :check = false; 
             default :
             	System.out.println("Wrong number/key pressed.");
             	
