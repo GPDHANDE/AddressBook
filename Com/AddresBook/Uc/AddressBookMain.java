@@ -85,16 +85,6 @@ public class AddressBookMain
     }
     public void addContact() 
     {
-    	boolean condi = true;
-    	while (condi) 
-    	{
-            System.out.println("1. Add contact\t 2. Edit contact\t 3. Delete contact\t 4. Exit");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-            switch (choice) 
-            {
-                case 1 -> 
-                {
                     System.out.print("Enter the first name: ");
                     String firstName = scanner.nextLine();
                     System.out.print("Enter the last name: ");
@@ -116,110 +106,104 @@ public class AddressBookMain
                     if (contacts.stream().anyMatch(contact -> contact.equals(newContact))) {
                         System.out.println("This contact already exists.");
                     }
-                    else {
+                    else 
+                    {
                         contacts.add(newContact);
-                        numOfContacts++;
+                        MultipleAddressBook.updateDictionaries(city, state, newContact);
                     }
 
+    }
+    public void editContact() 
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the first name of the contact you want to edit: ");
+        String name = scanner.next();
+        for (AddressBookMain cont : contacts) {
+            if (Objects.equals(cont.firstName, name)) {
+                System.out.println("What do you want to edit?");
+                System.out.println("1. Address");
+                System.out.println("2. City");
+                System.out.println("3. State");
+                System.out.println("4. Zip code");
+                System.out.println("5. Phone number");
+                System.out.println("6. Email");
+                int scase = scanner.nextInt();
+                scanner.nextLine();
+                switch (scase) {
+                    case 1 -> {
+                        System.out.println("Enter the new address: ");
+                        cont.address = scanner.nextLine();
+                        System.out.println("The address has been changed.");
+                    }
+                    case 2 -> {
+                        System.out.println("Enter the new City: ");
+                        cont.city = scanner.nextLine();
+                        System.out.println("The City has been changed.");
+                    }
+                    case 3 -> {
+                        System.out.println("Enter the new State: ");
+                        cont.state = scanner.nextLine();
+                        System.out.println("The state has been changed.");
+                    }
+                    case 4 -> {
+                        System.out.println("Enter the new Zip code: ");
+                        cont.zipCode = scanner.nextLine();
+                        System.out.println("The zip code has been changed.");
+                    }
+                    case 5 -> {
+                        System.out.println("Enter the new phone number: ");
+                        cont.phoneNumber = scanner.nextLine();
+                        System.out.println("The phone number has been changed.");
+                    }
+                    case 6 -> {
+                        System.out.println("Enter the new email: ");
+                        cont.email = scanner.nextLine();
+                        System.out.println("The email has been changed.");
+                    }
+                    default -> System.out.println("Wrong number/key entered.");
                 }
-                case 2 -> 
-                {
-                    for (AddressBookMain cont : contacts)
-                    {
-                        System.out.println(cont.firstName);
-                    }
-                    System.out.println("Enter the first name of that contact you want to edit: ");
-                    System.out.println("Enter the first name of the contact you want to edit: ");
-                    String name = scanner.next();
-                    for (AddressBookMain cont : contacts) 
-                    {
-                        if (Objects.equals(cont.firstName, name)) 
-                        {
-                            System.out.println("What do you want to edit?");
-                            System.out.println("1. Address");
-                            System.out.println("2. City");
-                            System.out.println("3. State");
-                            System.out.println("4. Zip code");
-                            System.out.println("5. Phone number");
-                            System.out.println("6. Email");
-                            int scase = scanner.nextInt();
-                            switch (scase) 
-                            {
-                                case 1 -> {
-                                    scanner.nextLine();
-                                    System.out.println("Enter the new address: ");
-                                    cont.address = scanner.nextLine();
-                                    System.out.println("The address has been changed.");
-                                }
-                                case 2 -> {
-                                    scanner.nextLine();
-                                    System.out.println("Enter the new City: ");
-                                    cont.city = scanner.nextLine();
-                                    System.out.println("The City has been changed.");
-                                }
-                                case 3 -> {
-                                    scanner.nextLine();
-                                    System.out.println("Enter the new State: ");
-                                    cont.state = scanner.nextLine();
-                                    System.out.println("The state has been changed.");
-                                }
-                                case 4 -> 
-                                {
-                                    scanner.nextLine();
-                                    System.out.println("Enter the new Zip code: ");
-                                    cont.zipCode = scanner.nextLine();
-                                    System.out.println("The zip code has been changed.");
-                                }
-                                case 5 -> 
-                                {
-                                    scanner.nextLine();
-                                    System.out.println("Enter the new phone number: ");
-                                    cont.phoneNumber = scanner.nextLine();
-                                    System.out.println("The phone number has been changed.");
-                                }
-                                case 6 -> 
-                                {
-                                    scanner.nextLine();
-                                    System.out.println("Enter the new email: ");
-                                    cont.email = scanner.nextLine();
-                                    System.out.println("The email has been changed.");
-                                }
-                                default -> System.out.println("Wrong number/key entered.");
-                            }
-                            System.out.println("The new contact info is: ");
-                        }
-                    }
-                 }
-                 case 3 -> 
-                 {
-                      if (numOfContacts > 0) 
-                      {
-	                      deleteContact(contacts);
-	                      numOfContacts--;
-                      }
-                 }
-                 case 4 -> condi = false;
-                        default -> System.out.println("Wrong number/key pressed.");
+                MultipleAddressBook.updateDictionaries(cont.city, cont.state, cont);
+                System.out.println("The new contact info is: ");
+                return;
             }
         }
-    }
-    	
-           static void deleteContact(ArrayList<AddressBookMain> contacts) 
-           {
-                Scanner scanner = new Scanner(System.in);
-                for (int i = 0; i < contacts.size(); i++) {
-                    System.out.printf("%s\n", contacts.get(i).firstName);
-                }
-                System.out.println("Enter the name of the contact you want to delete");
-                String name = scanner.nextLine();
-                for (int i = 0; i < contacts.size(); i++) {
-                    if (contacts.get(i).firstName.equals(name)) {
-                        contacts.remove(i);
-                        break;
-                    }
-                }
+        System.out.println("Contact not found.");
+    }    
+    
+    public void deleteContact() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the name of the contact you want to delete");
+        String name = scanner.nextLine();
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).firstName.equals(name)) {
+                AddressBookMain contact = contacts.remove(i);
+                MultipleAddressBook.cityPersonMap.get(contact.city).remove(contact);
+                MultipleAddressBook.statePersonMap.get(contact.state).remove(contact);
                 System.out.println("Contact has been deleted");
+                return;
             }
+        }
+        System.out.println("Contact not found.");
+    }
+       public void manageContacts() 
+       {
+           Scanner scanner = new Scanner(System.in);
+           boolean condi = true;
+           while (condi) 
+           {
+               System.out.println("1. Add contact\t 2. Edit contact\t 3. Delete contact\t 4. Exit");
+               int choice = scanner.nextInt();
+               scanner.nextLine();
+               switch (choice) 
+               {
+                 case 1 : addContact();
+                 case 2 : editContact();
+                 case 3 : deleteContact();
+                 case 4 : condi = false;
+                 default: System.out.println("Wrong number/key pressed.");
+               }
+           }
+       }
 	public static void main(String[] args) 
 	{
 
