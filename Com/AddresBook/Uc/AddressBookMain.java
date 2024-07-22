@@ -1,4 +1,3 @@
-package Com.AddresBook.Uc;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -18,7 +17,7 @@ public class AddressBookMain
     static Scanner scanner = new Scanner(System.in);
     
     
-    public String getFirstName() {
+  public String getFirstName() {
 		return firstName;
 	}
 	public String getLastName() {
@@ -45,9 +44,12 @@ public class AddressBookMain
 	public ArrayList<AddressBookMain> getContacts() {
 		return contacts;
 	}
-	AddressBookMain()
+	
+
+
+    AddressBookMain()
     {
-       
+
     }
     AddressBookMain(String firstName, String lastName, String address, String city, String state, String zipCode, String phoneNumber, String email) {
         this.firstName = firstName;
@@ -65,6 +67,7 @@ public class AddressBookMain
         contacts.stream().sorted((a,b)->(a.firstName+" "+a.lastName).compareToIgnoreCase(b.firstName+" "+b.lastName)).forEach(System.out::println);
     }
     
+
     @Override
     public boolean equals(Object obj) 
     {
@@ -74,6 +77,7 @@ public class AddressBookMain
         return Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName);
     }
+
     public void addContact() 
     {
                     System.out.print("Enter the first name: ");
@@ -92,6 +96,7 @@ public class AddressBookMain
                     String phoneNumber = scanner.nextLine();
                     System.out.print("Enter the email: ");
                     String email = scanner.nextLine();
+
                     
                     AddressBookMain newContact =new AddressBookMain(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
                     if (contacts.stream().anyMatch(contact -> contact.equals(newContact))) {
@@ -171,7 +176,7 @@ public class AddressBookMain
                 AddressBookMain contact = contacts.remove(i);
                 MultipleAddressBook.cityPersonMap.get(contact.city).remove(contact);
                 MultipleAddressBook.statePersonMap.get(contact.state).remove(contact);
-                System.out.println("Contact has been deleted");
+                System.out.println("Contact has been deleted")
                 return;
             }
         }
@@ -196,6 +201,7 @@ public class AddressBookMain
                }
            }
        }
+
        
        
 	@Override
@@ -206,6 +212,7 @@ public class AddressBookMain
 	}
 	public static void main(String[] args) 
 	{
+		
 
 
 	}
